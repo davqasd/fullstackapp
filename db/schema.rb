@@ -10,9 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_06_01_072340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "articles", force: :cascade do |t|
+    t.string "name"
+    t.text "body"
+    t.bigint "story_id"
+    t.string "atype"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["atype"], name: "index_articles_on_atype"
+    t.index ["name"], name: "index_articles_on_name"
+    t.index ["story_id"], name: "index_articles_on_story_id"
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_stories_on_name"
+  end
+
+  add_foreign_key "articles", "stories"
 end
