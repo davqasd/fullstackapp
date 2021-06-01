@@ -57,7 +57,7 @@ module Api::V1::Articles
     select_sql = <<~SQL.squish
       #{grouped_by} AS grouped_by,
       count(id) AS count_articles,
-      count(atype) AS count_articles_types,
+      count(DISTINCT atype) AS count_articles_types,
       max(created_at) AS last_created_article,
       ARRAY_AGG(json_build_object(#{article_attributes})) AS articles
     SQL

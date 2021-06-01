@@ -1,8 +1,8 @@
 import { Method } from 'axios';
 
-import * as gems from './gems/gems-api';
+import * as articles from './articles/articles-api';
 export class API {
-  public static gems = gems.API;
+  public static articles = articles.API;
 }
 
 export enum RequestMethod {
@@ -25,11 +25,11 @@ export interface IRequest {
 export interface IServerResponse {
   status: string;
   /**
-   * Тело ответа сервера
+   * Body response
    */
   data: any;
   /**
-   * Заголовки ответа сервера
+   * Response headers
    */
   headers: any;
 }
