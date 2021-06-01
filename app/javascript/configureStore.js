@@ -9,7 +9,8 @@ const initialState = {
     q: null,
     grouped_by: null,
     size: 1000,
-    sort_by: 'body'
+    sort_by: 'body',
+    sort_order: 'asc'
   }
 };
 

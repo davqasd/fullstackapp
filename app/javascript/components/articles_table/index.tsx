@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchArticles } from '../../pages/requests';
+import TableHeader from '../table_header';
 
 const ArticlesTable: FC = () => {
   const dispatch = useDispatch();
@@ -55,17 +56,7 @@ const ArticlesTable: FC = () => {
 
   return (
     <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>name</th>
-          <th>body</th>
-          <th>atype</th>
-          <th>story_id</th>
-          <th>created_at</th>
-          <th>updated_at</th>
-        </tr>
-      </thead>
+      <TableHeader/>
       <tbody>
         { rows }
       </tbody>
