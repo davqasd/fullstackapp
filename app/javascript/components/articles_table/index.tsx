@@ -1,7 +1,18 @@
 import React, { FC } from 'react';
 import { Table } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux';
 
-const ArticlesTable: FC = ({ data }) => {
+import { fetchArticles } from '../../pages/requests';
+
+const ArticlesTable: FC = () => {
+  const dispatch = useDispatch();
+  const params = useSelector((state) => state.params);
+  const data = useSelector((state) => state.articles);
+
+  React.useEffect(() => {
+    dispatch(fetchArticles(params));
+  }, []);
+
   let rows = [];
   if (data && data.grouped_articles) {
     data.grouped_articles.forEach(({articles, count_articles, count_articles_types, last_created_article, grouped_by}, index) => {
