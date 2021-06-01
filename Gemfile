@@ -12,6 +12,11 @@ gem 'sass-rails', '>= 6'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
+# API
+gem 'jsonapi-serializer'
+gem 'kaminari'
+gem 'ransack'
+
 # Front
 gem 'react-rails'
 gem 'webpacker', '~> 5.0'

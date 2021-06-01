@@ -9,5 +9,6 @@ FactoryBot.define do
       "body #{n}"
     end
     atype { Article::TYPES.first }
+    association :story
   end
 end

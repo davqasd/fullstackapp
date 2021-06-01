@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   namespace :api, constraints: { format: 'json' } do
     namespace :v1 do
-      # api routes
+      resources :articles, only: %w[index]
     end
   end
 
