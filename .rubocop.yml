@@ -1,0 +1,111 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+  CacheRootDirectory: tmp/cache
+  TargetRubyVersion: 2.7.3
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+    - 'tmp/**/*'
+    - 'node_modules/**/*'
+    - 'bundle/**/*'
+    - 'db/seeds/**'
+
+Style/AsciiComments:
+  Enabled: False
+
+Naming/AsciiIdentifiers:
+  Enabled: False
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'db/migrate/*'
+
+Style/Documentation:
+  Enabled: false
+
+Style/GuardClause:
+  MinBodyLength: 5
+
+Style/Lambda:
+  Enabled: false
+
+Metrics/ClassLength:
+  Exclude:
+    - 'db/migrate/*'
+    - 'app/controllers/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'spec/**/*'
+
+Layout/LineLength:
+  IgnoreCopDirectives: true
+  Exclude:
+    - 'spec/**/*'
+    - 'bin/bundle'
+
+Style/PerlBackrefs:
+  Enabled: False
+
+Style/FormatStringToken:
+  Enabled: False
+
+Style/DoubleNegation:
+  Enabled: False
+
+Style/ClassAndModuleChildren:
+  Enabled: False
+
+Lint/RaiseException:
+  Enabled: True
+
+Lint/StructNewOverride:
+  Enabled: True
+
+Style/HashEachMethods:
+  Enabled: True
+
+Style/HashTransformKeys:
+  Enabled: True
+
+Style/HashTransformValues:
+  Enabled: True
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: True
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: True
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: True
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: True
+
+Style/ExponentialNotation:
+  Enabled: True
+
+Style/RedundantFetchBlock:
+  Enabled: False
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: True
+
+Style/RedundantRegexpEscape:
+  Enabled: True
+
+Style/SlicingWithRange:
+  Enabled: True
+
+Layout/DotPosition:
+  EnforcedStyle: leading
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Style/HashLikeCase:
+  Enabled: False
