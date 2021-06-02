@@ -16,6 +16,13 @@ module Api::V1::Articles
     Api::V1::Result.new(data: data, payload: {}, meta: meta_payload)
   end
 
+  def show(id)
+    record = Article.find(id)
+    data = prepare(:article, record, serializer: ArticlesSerializer)
+
+    Api::V1::Result.new(data: data)
+  end
+
   ## --------------------- Helpers ---------------------
 
   def list_query(params)

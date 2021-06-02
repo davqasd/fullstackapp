@@ -80,4 +80,37 @@ RSpec.describe Api::V1::ArticlesController, type: :controller do
       end
     end
   end
+
+  describe 'POST create_random' do
+    let(:stream_name) { 'articles' }
+
+    before { create_list(:story, 5) }
+
+    it 'render status 201' do
+      post :create_random
+
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'should send websocket message' do
+      expect { post :create_random }.to have_broadcasted_to(stream_name)
+        .with(a_hash_including(method: 'create'))
+    end
+  end
+
+  describe 'POST destroy' do
+    let(:stream_name) { 'articles' }
+    let(:article) { create(:article) }
+
+    it 'render status 201' do
+      delete :destroy, params: { id: article.id }
+
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'should send websocket message' do
+      expect { delete :destroy, params: { id: article.id } }.to have_broadcasted_to(stream_name)
+        .with(a_hash_including(method: 'delete'))
+    end
+  end
 end
