@@ -12,3 +12,19 @@ export const fetchArticles = (resultParams) => {
     });
   }
 };
+
+export const createRandomArticle = () => {
+  API.articles.createRandomArticle().then(res => {
+    // ok! get message via websockets!
+  }).catch(err => {
+    console.warn(err);
+  });
+};
+
+export const deleteArticle = (id) => {
+  API.articles.deleteArticle(id).then(res => {
+    // ok! get message via websockets!
+  }).catch(err => {
+    console.warn(err);
+  });
+};

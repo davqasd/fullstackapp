@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 import { articlesReducer } from './reducers/articles_reducer'
 
 const initialState = {
+  raw_articles: [],
   articles: {},
   params: {
     q: null,

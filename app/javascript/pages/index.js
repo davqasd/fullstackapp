@@ -1,12 +1,63 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
 import Header from '../components/header';
 import ArticlesTable from '../components/articles_table';
 import TableSearch from '../components/table_search';
 import TableGroupBy from '../components/table_group_by';
+import { addArticle, setDeleteArticle } from './actions';
+import { createRandomArticle } from './requests';
+
+import WebSocketConnector from '../utils/sockets/WebSocketConnector';
+import ArticleHandler from '../utils/sockets/handlers/ArticleHandler';
 
 const IndexPage = () => {
+  const dispatch = useDispatch();
+
+  const handleAddArticle = (event) => {
+    event.preventDefault();
+
+    createRandomArticle();
+  };
+
+  const openConnection = () => {
+    return new WebSocket(`ws://${(process.env.API_HOST_URL).split('//')[1]}:${3000}/cable`);
+  };
+
+  const websocketConnection = openConnection();
+  websocketConnection.onopen = (event) => {
+    const subscribtionMsg = {
+      "command": "subscribe",
+      "identifier": JSON.stringify({ "channel": "ArticleChannel" })
+    }
+    websocketConnection.send(JSON.stringify(subscribtionMsg));
+  }
+
+  websocketConnection.onmessage = (message) => {
+    let data = JSON.parse(message.data);
+    if (!data.identifier) {
+      return
+    }
+    let identifier = JSON.parse(data.identifier);
+    if (identifier.channel == 'ArticleChannel' && data.message) {
+      let message = data.message;
+
+      switch(message.method) {
+        case 'create':
+          console.log('Message create article: ', message.data);
+          dispatch(addArticle(message.data.article));
+          break;
+        case 'delete':
+          console.log('Message delete article: ', message.data);
+          dispatch(setDeleteArticle(message.data.id));
+          break;
+      }
+    } else {
+      return
+    }
+  }
+
   return (
     <>
       <Header />
@@ -18,6 +69,8 @@ const IndexPage = () => {
         <div className="input-wrapper">
           <TableGroupBy/>
         </div>
+
+        <Button className="control-btn" variant="success" onClick={handleAddArticle}>Add random article</Button>
 
         <div className="input-wrapper">
           <ArticlesTable/>

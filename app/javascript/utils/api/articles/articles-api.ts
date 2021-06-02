@@ -12,4 +12,18 @@ export class API {
       query: payload,
     });
   }
+
+  public static createRandomArticle(): Promise<AxiosResponse> {
+    return httpRequest({
+      url: 'articles/create_random',
+      method: RequestMethod.POST
+    });
+  }
+
+  public static deleteArticle(id): Promise<AxiosResponse> {
+    return httpRequest({
+      url: `articles/${id}`,
+      method: RequestMethod.DELETE
+    });
+  }
 }

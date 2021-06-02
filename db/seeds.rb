@@ -9,6 +9,6 @@ end
     name: "name #{i % 20}",
     body: "body: #{i % 10}",
     atype: Article::TYPES[i % Article::TYPES.size],
-    story_id: Story.all[i * 2 % Story.count].id
+    story_id: Story.all[(rand * 100).to_i / 5 % Story.count].id
   )
 end

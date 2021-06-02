@@ -33,6 +33,7 @@ const TableHeader: FC = () => {
     <thead>
       <tr>
         {headers}
+        <th/>
       </tr>
     </thead>
   );
