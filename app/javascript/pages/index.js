@@ -22,7 +22,11 @@ const IndexPage = () => {
   };
 
   const openConnection = () => {
-    return new WebSocket(`ws://${(process.env.API_HOST_URL).split('//')[1]}:${3000}/cable`);
+    if (process.env.RAILS_ENV == 'production'){
+      return new WebSocket(`wss://${(process.env.API_HOST_URL).split('//')[1]}:${process.env.WEBSOCKETS_PORT}/cable`);
+    } else {
+      return new WebSocket(`ws://${(process.env.API_HOST_URL).split('//')[1]}:${process.env.WEBSOCKETS_PORT}/cable`);
+    }
   };
 
   const websocketConnection = openConnection();

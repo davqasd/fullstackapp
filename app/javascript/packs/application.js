@@ -6,6 +6,8 @@
 import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 
+import 'css/site';
+
 Rails.start()
 ActiveStorage.start()
 // Support component names relative to this directory:
