@@ -11,3 +11,17 @@ export function setArticles(data) {
     data
   };
 };
+
+export function addArticle(data) {
+  return {
+    type: 'ADD_ARTICLE',
+    data
+  };
+};
+
+export function setDeleteArticle(id) {
+  return {
+    type: 'DELETE_ARTICLE',
+    id
+  };
+};
