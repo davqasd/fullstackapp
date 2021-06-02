@@ -5,8 +5,6 @@ import { Helmet } from 'react-helmet';
 
 import IndexPage from '../pages/index';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import configureStore from '../configureStore';
 const store = configureStore();
 

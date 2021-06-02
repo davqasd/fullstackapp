@@ -8,6 +8,7 @@ ruby '2.7.3'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
+gem 'redis', '~> 4.0'
 gem 'sass-rails', '>= 6'
 
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -38,6 +39,11 @@ group :test do
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'webmock'
+end
+
+group :capistrano do
+  gem 'capistrano', '3.9.0'
+  gem 'capistrano-docker', git: 'https://github.com/netguru/capistrano-docker.git'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

@@ -11,6 +11,7 @@ AllCops:
     - 'node_modules/**/*'
     - 'bundle/**/*'
     - 'db/seeds/**'
+    - config/deploy.rb
 
 Style/AsciiComments:
   Enabled: False

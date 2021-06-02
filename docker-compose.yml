@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  db:
+    image: postgres:11.12
+    volumes:
+      - /mnt/postgres-data:/var/lib/postgresql/data/pgdata
+      - /home/david/backups:/backups
+    env_file:
+      - database.env
+    restart: always
+
+  app:
+    build: .
+    command: sh docker/entrypoint.sh
+    volumes:
+      - .:/usr/src/app
+      - ./config/database.yml.example:/usr/src/app/config/database.yml
+      - ./public:/usr/share/nginx/html/fullstackapp
+      - ./bundle:/usr/local/bundle
+      - ./tmp:/usr/src/app/tmp
+      - /share/uploads:/usr/src/app/public/uploads
+      - /share/images:/usr/src/app/public/images
+      - /share/node_modules:/usr/src/app/node_modules
+    restart: always
+    env_file:
+      - database.env
+      - secret.env
+    environment:
+      RAILS_ENV: "${RAILS_ENV}"
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx
+    links:
+      - app
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./public:/usr/share/nginx/html/fullstackapp
+      - /share/logs/fullstackapp_${RAILS_ENV}:/usr/src/app/log
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    restart: always
+
+  redis:
+    image: redis:6.2
