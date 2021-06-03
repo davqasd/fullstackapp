@@ -1,3 +1,5 @@
+DEMO: [https://fullstackapp.logdata.me](https://fullstackapp.logdata.me)
+
 ## Create Rails application
 
 Given we have two models, Article and Story. Article has name, text and type (like blog post, facebook post or tweet).
